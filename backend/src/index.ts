@@ -5,9 +5,11 @@ import express from 'express';
 import { BASE_PROMPT } from './prompts.js';
 import {basePrompt as reactBasePrompt} from './defaults/react.js';
 import {basePrompt as nodeBasePrompt} from './defaults/node.js';
+import cors from 'cors';
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 dotenv.config();
 const api_key: string = process.env.GEMINI_API_KEY as string;
 
