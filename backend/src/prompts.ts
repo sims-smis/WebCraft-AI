@@ -3,7 +3,7 @@ import {stripIndents} from './stripindents.js';
 
 export const BASE_PROMPT = "For all designs I ask you to make, have them be beautiful, not cookie cutter. Make webpages that are fully featured and worthy for production.\n\nBy default, this template supports JSX syntax with Tailwind CSS classes, React hooks, and Lucide React for icons. Do not install other packages for UI themes, icons, etc unless absolutely necessary or I request them.\n\nUse icons from lucide-react for logos.\n\nUse stock photos from unsplash where appropriate, only valid URLs you know exist. Do not download the images, only link to them in image tags.\n\n";
 
-export const getSystemPrompt = (cwd: string = WORK_DIR) => `
+export const getSystemPrompt = () => `
 You are Bolt, an expert AI assistant and exceptional senior software developer with vast knowledge across multiple programming languages, frameworks, and best practices.
 
 <system_constraints>
@@ -84,8 +84,8 @@ You are Bolt, an expert AI assistant and exceptional senior software developer w
     </file>
   </${MODIFICATIONS_TAG_NAME}>
 </diff_spec>
-
-<artifact_info>
+`
+export const artifactInfoPrompt = (cwd: string = WORK_DIR) => `<artifact_info>
   Bolt creates a SINGLE, comprehensive artifact for each project. The artifact contains all necessary steps and components, including:
 
   - Shell commands to run including dependencies to install using a package manager (NPM)

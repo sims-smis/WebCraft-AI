@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 import OpenAI from "openai";
-import { getSystemPrompt } from './prompts.js';
+import { getSystemPrompt, artifactInfoPrompt } from './prompts.js';
 import express from 'express';
 import { BASE_PROMPT } from './prompts.js';
 import {basePrompt as reactBasePrompt} from './defaults/react.js';
@@ -10,6 +10,7 @@ import cors from 'cors';
 const app = express();
 app.use(express.json());
 app.use(cors());
+app.use(cors({ origin: 'http://localhost:5173' }));
 dotenv.config();
 const api_key: string = process.env.GEMINI_API_KEY as string;
 
@@ -50,11 +51,18 @@ app.post('/template', async (req, res) => {
 });
 
 
-app.post('chat', async (req, res) => {
+app.post('/chat', async (req, res) => {
   const messages= req.body.messages;
+  const systemPrompt = getSystemPrompt();
+  const artifactPrompt = artifactInfoPrompt();
   const response = await openai.chat.completions.create({
     model: "gemini-2.0-flash",
-    messages: messages
+    messages: [
+      { role: "system", content: systemPrompt },
+      {role:"system", content: artifactPrompt},
+      {role: "user",content: "Please respond strictly following the <boltArtifact> format." },
+      ...messages
+    ]
   });
   res.json({
     response: response.choices[0].message.content

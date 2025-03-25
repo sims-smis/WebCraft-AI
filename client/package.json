@@ -41,6 +41,7 @@
     "@radix-ui/react-tooltip": "^1.1.2",
     "@types/xml2js": "^0.4.14",
     "@webcontainer/api": "^1.5.1-internal.9",
+    "@xterm/xterm": "^5.5.0",
     "axios": "^1.8.3",
     "axis": "^1.0.0",
     "class-variance-authority": "^0.7.0",

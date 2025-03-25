@@ -1,16 +1,22 @@
-// import { WebContainer } from '@webcontainer/api';
-// import  { useEffect, useState} from 'react'
+import { useState, useEffect } from 'react';
+import { WebContainer } from '@webcontainer/api';
 
-// import React from 'react'
+let webcontainerInstance: WebContainer | null = null; // Cache instance
 
-// function useWebcontainer() {
-//   useEffect(() => {
-//     const webcontainer = new WebContainer();
-//     const something = await webcontainer.boot();
-//   })
-//   return (
-//     <div> </div>
-//   )
-// }
+export default function useWebcontainer() {
+    const [webcontainer, setWebcontainer] = useState<WebContainer | null>(null);
+    const [isBooted, setIsBooted] = useState(false);
 
-// export default useWebcontainer
+    useEffect(() => {
+        const bootWebContainer = async () => {
+            if (!webcontainerInstance) {
+                webcontainerInstance = await WebContainer.boot();
+            }
+            setIsBooted(true);
+            setWebcontainer(webcontainerInstance);
+        };
+        bootWebContainer();
+    }, []);
+
+    return { webcontainer, isBooted };
+}
