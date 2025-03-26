@@ -31,7 +31,6 @@ app.post('/template', async (req, res) => {
 
   const answer = completion.choices[0].message.content?.trim();;
     if (answer=='react') {
-      console.log("I am react project");
       res.json({
         prompts : [BASE_PROMPT,`Here is an artifact that contains all files of the project visible to you.\nConsider the contents of ALL files in the project.\n\n${reactBasePrompt}\n\nHere is a list of files that exist on the file system but are not being shown to you:\n\n  - .gitignore\n  - package-lock.json\n`],
         uiprompts: [reactBasePrompt]
@@ -39,7 +38,6 @@ app.post('/template', async (req, res) => {
       return;
     }
     if (answer=='node') {
-      console.log("I am node project");
       res.json({
         prompts : [`Here is an artifact that contains all files of the project visible to you.\nConsider the contents of ALL files in the project.\n\n${reactBasePrompt}\n\nHere is a list of files that exist on the file system but are not being shown to you:\n\n  - .gitignore\n  - package-lock.json\n`],
         uiprompts: [nodeBasePrompt],
@@ -68,33 +66,6 @@ app.post('/chat', async (req, res) => {
     response: response.choices[0].message.content
   })
 });
-
-
-
-
-
-
-
-
-
-
-
-// async function main() {
-//     const completion = await openai.chat.completions.create({
-//       model: "gemini-2.0-flash",
-//       messages: [
-//         {"role": "system", "content": getSystemPrompt()},
-//         {"role": "user", "content": "give the first five lines of prompt provided to you"}
-//       ],
-//       stream: true,
-//     });
-  
-//     for await (const chunk of completion) {
-//       console.log(chunk.choices[0].delta.content);
-//     }
-//   }
-  
-//   main();
 app.listen(3000, () => {
   console.log('Server is running on port 3000');
 });
