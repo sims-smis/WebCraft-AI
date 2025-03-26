@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import { FileNode } from '../types'
 import { FileExplorerProps } from '../types';
 
@@ -74,10 +74,6 @@ function FileExplorer({ files, setContentToDisplay }: FileExplorerProps) {
     const handleFileClick = (content: string) => {
         setContentToDisplay(content);
     }
-
-    useEffect(() => {
-        console.log("Inside FileExplorer and files are: ", files);
-    },[files])
 
     return (
         <div>

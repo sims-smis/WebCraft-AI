@@ -13,7 +13,6 @@ function Home() {
 
     const navigate = useNavigate();
     const [prompt, setPrompt] = useState('');
-    // const [messages, setMessages] = useState<Message[]>([]);
     const messages: Message[] = [];
 
 
@@ -44,7 +43,7 @@ function Home() {
                             className="h-24 px-4 py-2 text-base"
                         />
                         <Button type="submit" className="w-full">
-                            Generate Website <MoveRight className="ml-2 h-4 w-4" />
+                            Build <MoveRight className="ml-2 h-4 w-4" />
                         </Button>
                     </form>
                 </div>
