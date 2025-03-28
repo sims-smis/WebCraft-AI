@@ -1,3 +1,3 @@
-# WebsiteMaker
+# WebCraft AI
 
-This is a website that make other websites.
+This is website make other websites.
